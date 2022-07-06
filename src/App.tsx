@@ -2,6 +2,14 @@ import type { Component } from "solid-js";
 import { createTheme, ThemeProvider } from "@suid/material/styles";
 
 import type { PaletteColor } from "@suid/material/styles/createPalette";
+import {
+  ChartOptions,
+  ColorType,
+  DeepPartial,
+  LineStyle,
+  CrosshairMode,
+} from "lightweight-charts";
+
 import Nav from "./nav/Nav";
 import Main from "./main/Main";
 import Footer from "./footer/Footer";
@@ -34,9 +42,9 @@ export const theme = createTheme({
       contrastText: "#263238",
     },
     text: {
-      primary: "#eee",
-      secondary: "#ccc",
-      disabled: "#999",
+      primary: "#eeeeee",
+      secondary: "#cccccc",
+      disabled: "#999999",
     },
     background: {
       paper: "#1a237e",
@@ -51,19 +59,50 @@ export const theme = createTheme({
   },
 });
 
+export const chartOptions: DeepPartial<ChartOptions> = {
+  width: 0,
+  height: 0,
+  watermark: {
+    color: theme.palette.text.primary + "10",
+    visible: true,
+    text: "cebulion",
+    fontSize: 100,
+  },
+  layout: {
+    background: {
+      type: ColorType.Solid,
+      color: theme.palette.background.default + "e0",
+    },
+    textColor: theme.palette.text.primary + "ee",
+  },
+  crosshair: {
+    mode: CrosshairMode.Normal,
+  },
+  grid: {
+    vertLines: {
+      color: theme.palette.background.paper + "80",
+      style: LineStyle.Dashed,
+    },
+    horzLines: {
+      color: theme.palette.background.paper + "80",
+      style: LineStyle.Dashed,
+    },
+  },
+};
+
 const App: Component = () => {
   return (
     <ThemeProvider theme={theme}>
       <main
-        class="p-0 m-0 w-screen h-screen"
+        class="flex flex-col p-0 m-0 w-screen h-screen"
         style={{
           "background-color": theme.palette.background.default,
           color: theme.palette.text.primary,
         }}
       >
-        <Nav />
-        <Main />
-        <Footer />
+        <Nav class="flex-shrink-0" />
+        <Main class="flex-1" />
+        <Footer class="flex-shrink-0" />
       </main>
     </ThemeProvider>
   );

@@ -11,10 +11,10 @@ import { setState } from "./SideMenu";
 import SideMenu from "./SideMenu";
 import Stats from "./Stats";
 
-const Nav: Component = () => {
+const Nav: Component<{class: string}> = (props) => {
   return (
     <div
-      class="flex flex-row justify-between flex-nowrap items-center p-1 truncate"
+      class={`${props.class} flex flex-row justify-between flex-nowrap items-center p-1 truncate`}
       style={{
         "border-bottom-color": `${theme.borders.main}`,
         "border-bottom-width": "2px",
@@ -26,7 +26,7 @@ const Nav: Component = () => {
         id="branding"
         class="inline-flex flex-row p-1 mx-3 shrink-0 grow-0 items-center"
       >
-        <img width="30px" src="/src/assets/logo.svg" alt="logo" />
+        <img width="30px" src="/src/assets/svg/logo.svg" alt="logo" />
         <div
           class="text-base p-1 mx-2 hidden xl:block cursor-default"
           style={{ color: theme.palette.text.secondary }}
@@ -61,7 +61,7 @@ const Nav: Component = () => {
         />
       </div>
       <div class="flex-1 p-1">
-          <Stats />
+        <Stats />
       </div>
       <div id="right_section" class="p-1 m-1">
         <Badge color="warning" variant="dot">
@@ -75,7 +75,7 @@ const Nav: Component = () => {
               <div class="w-6 h-6">
                 <img
                   width="100%"
-                  src="/src/assets/metamask.svg"
+                  src="/src/assets/svg/metamask.svg"
                   alt="metamask"
                   class="my-auto mx-auto"
                 />
