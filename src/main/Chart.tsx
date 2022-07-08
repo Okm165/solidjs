@@ -48,12 +48,11 @@ const Chart: Component<{} & DefaultProps> = (props) => {
       }
       const newRect = entries[0].contentRect;
       chart.applyOptions({ height: newRect.height, width: newRect.width });
-      console.log(newRect.height, newRect.width);
     }).observe(chartDOM);
   });
 
   return (
-    <div id={props.id} style={props.style} class={`${props.class}  truncate relative`}>
+    <div id={props.id} style={props.style} class={`${props.class} truncate relative`}>
       <div class="absolute top-0 bottom-0 left-0 right-0" ref={chartDOM}></div>
     </div>
   );

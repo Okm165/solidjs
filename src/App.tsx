@@ -1,12 +1,10 @@
-import type { Component } from "solid-js";
+import { Component, onMount } from "solid-js";
 import { ThemeProvider } from "@suid/material/styles";
 
 import { theme } from "./config";
 import Nav from "./nav/Nav";
 import Main from "./main/Main";
 import Footer from "./footer/Footer";
-
-
 
 const App: Component = () => {
   return (
