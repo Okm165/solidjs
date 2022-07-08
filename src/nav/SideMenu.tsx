@@ -1,5 +1,5 @@
 import { Component, createSignal } from "solid-js";
-import { theme } from "../App";
+import { DefaultProps, theme } from "../config";
 
 import Drawer from "@suid/material/Drawer";
 import ListItem from "@suid/material/ListItem";
@@ -15,9 +15,12 @@ import SettingsIcon from "@suid/icons-material/Settings";
 
 export const [state, setState] = createSignal<boolean>(false);
 
-const SideMenu: Component = () => {
+const SideMenu: Component<{} & DefaultProps> = (props) => {
   return (
     <Drawer
+      id={props.id}
+      style={props.style}
+      class={props.class}
       anchor="left"
       open={state()}
       onClose={(event) => {
