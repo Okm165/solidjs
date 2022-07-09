@@ -1,21 +1,10 @@
 import { Component, createMemo, createSignal, JSXElement } from "solid-js";
 import { onMount } from "solid-js";
-import { theme, DefaultProps, base, asset, short, long, OrderBookData } from "../config";
+import { theme, DefaultProps, base, asset, short, long, OrderBookData, TileType, Accuracy } from "../config";
 
 import OrderbookTile from "./OrderbookTile";
 
 const height = 16;
-
-export interface Accuracy {
-  price: number;
-  volume_asset: number;
-  volume_base: number;
-}
-
-export enum TileType {
-  Long,
-  Short,
-}
 
 interface OrderBookDataFill extends OrderBookData {
   fill?: number;
@@ -90,11 +79,11 @@ const Orderbook: Component<{ accuracy: Accuracy } & DefaultProps> = (props) => {
   });
 
   return (
-    <div id={props.id} style={props.style} class={`${props.class} p-1`}>
-      <div class="grid grid-cols-3 gap-1 text-xs font-light px-5">
+    <div id={props.id} style={props.style} class={`${props.class} flex flex-col p-1`}>
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-1 text-xs font-light px-5">
         <div class="truncate text-left">price</div>
         <div class="truncate text-right">{asset}</div>
-        <div class="truncate text-right">{base}</div>
+        <div class="truncate text-right hidden sm:block">{base}</div>
       </div>
       <div class="flex-1 relative">
         <div class="absolute top-0 bottom-0 left-0 right-0 flex flex-col-reverse overflow-hidden" ref={orderbookDOM}>
@@ -102,7 +91,7 @@ const Orderbook: Component<{ accuracy: Accuracy } & DefaultProps> = (props) => {
         </div>
       </div>
       <div class="flex-[0.15] flex flex-row text-xs font-thin px-2">
-        <div class="self-center">1 {asset} = </div>
+        <div class="self-center md:block hidden">1 {asset} = </div>
         <div style={{ color: theme.bars.rising }} class="self-center p-2 font-bold text-lg select-none">
           21,958.37
         </div>
