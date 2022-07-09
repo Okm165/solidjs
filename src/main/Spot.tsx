@@ -1,6 +1,6 @@
 import type { Component } from "solid-js";
-import { onMount } from "solid-js";
-import { theme, DefaultProps } from "../config";
+
+import { DefaultProps } from "../config";
 
 const Spot: Component<{} & DefaultProps> = (props) => {
   return (

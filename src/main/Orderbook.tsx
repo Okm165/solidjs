@@ -1,5 +1,5 @@
-import { Component, createMemo, createSignal, JSXElement } from "solid-js";
-import { onMount } from "solid-js";
+import { Component, createMemo, createSignal, JSXElement, onMount } from "solid-js";
+
 import { theme, DefaultProps, base, asset, short, long, OrderBookData, TileType, Accuracy } from "../config";
 
 import OrderbookTile from "./OrderbookTile";

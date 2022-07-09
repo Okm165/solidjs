@@ -1,7 +1,5 @@
-import type { Component } from "solid-js";
-import { onMount } from "solid-js";
-import { createChart } from "lightweight-charts";
-import { theme, chartOptions, DefaultProps } from "../config";
+import { Component } from "solid-js";
+import { DefaultProps } from "../config";
 
 import Chart from "./Chart";
 import Positions from "./Positions";

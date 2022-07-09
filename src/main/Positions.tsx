@@ -1,6 +1,6 @@
 import { Component, createSignal } from "solid-js";
-import { onMount } from "solid-js";
-import { theme, DefaultProps } from "../config";
+
+import { DefaultProps } from "../config";
 
 import ToggleButton from "@suid/material/ToggleButton";
 import ToggleButtonGroup from "@suid/material/ToggleButtonGroup";

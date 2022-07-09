@@ -1,8 +1,8 @@
-import { Component, createSignal } from "solid-js";
-import { onMount } from "solid-js";
+import { Component } from "solid-js";
+
+import { theme, DefaultProps, TileType, Accuracy } from "../config";
 
 import Button from "@suid/material/Button";
-import { theme, DefaultProps, TileType, Accuracy, base, asset } from "../config";
 
 const TransactionTile: Component<{ price: number; volume: number; type: TileType; accuracy: Accuracy; time: Date } & DefaultProps> = (props) => {
   return (
@@ -19,9 +19,7 @@ const TransactionTile: Component<{ price: number; volume: number; type: TileType
           {props.price.toFixed(props.accuracy.price)}
         </div>
         <div class="truncate text-right">{props.volume.toFixed(props.accuracy.volume_asset)}</div>
-        <div class="truncate text-right hidden 2xl:block">
-          {new Intl.DateTimeFormat("en-GB",{ timeStyle: "medium" }).format(props.time)}
-        </div>
+        <div class="truncate text-right hidden 2xl:block">{new Intl.DateTimeFormat("en-GB", { timeStyle: "medium" }).format(props.time)}</div>
       </div>
     </Button>
   );

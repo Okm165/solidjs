@@ -1,9 +1,9 @@
-import { createTheme } from "@suid/material/styles";
+import { createSignal, JSX, JSXElement } from "solid-js";
 
-import type { PaletteColor } from "@suid/material/styles/createPalette";
+import { createTheme } from "@suid/material/styles";
+import { PaletteColor } from "@suid/material/styles/createPalette";
+
 import { ChartOptions, ColorType, DeepPartial, LineStyle, CrosshairMode } from "lightweight-charts";
-import { createSignal, JSXElement } from "solid-js";
-import { JSX } from "solid-js";
 
 declare module "@suid/material/styles/createTheme" {
   interface ThemeInput {
@@ -95,8 +95,8 @@ export interface DefaultProps {
 }
 
 export interface Accuracy {
-  price?: number;
-  volume_asset?: number;
+  price: number;
+  volume_asset: number;
   volume_base?: number;
 }
 
@@ -164,46 +164,45 @@ export const [long, setLong] = createSignal<OrderBookData[]>([
 ]);
 
 export const [transactions, setTransactions] = createSignal<TransactionData[]>([
-  { price: 21814.81, type: TileType.Long, volume: 0.00072, time: new Date(Date.now())},
-  { price: 21814.77, type: TileType.Long, volume: 0.03, time: new Date(Date.now())},
-  { price: 21814.14, type: TileType.Short, volume: 0.00083, time: new Date(Date.now())},
-  { price: 21813.98, type: TileType.Long, volume: 0.45879, time: new Date(Date.now())},
-  { price: 21813.85, type: TileType.Long, volume: 0.22, time: new Date(Date.now())},
-  { price: 21813.63, type: TileType.Short, volume: 0.00069, time: new Date(Date.now())},
-  { price: 21813.62, type: TileType.Long, volume: 0.01168, time: new Date(Date.now())},
-  { price: 21812.97, type: TileType.Long, volume: 0.00765, time: new Date(Date.now())},
-  { price: 21812.75, type: TileType.Long, volume: 0.00061, time: new Date(Date.now())},
-  { price: 21812.43, type: TileType.Long, volume: 0.55, time: new Date(Date.now())},
-  { price: 21812.32, type: TileType.Short, volume: 0.04473, time: new Date(Date.now())},
-  { price: 21811.66, type: TileType.Short, volume: 0.00117, time: new Date(Date.now())},
-  { price: 21811.66, type: TileType.Long, volume: 0.00117, time: new Date(Date.now())},
-  { price: 21811.66, type: TileType.Long, volume: 0.00117, time: new Date(Date.now())},
-  { price: 21811.66, type: TileType.Long, volume: 0.00817, time: new Date(Date.now())},
-  { price: 21811.66, type: TileType.Short, volume: 0.10117, time: new Date(Date.now())},
-  { price: 21811.66, type: TileType.Short, volume: 0.20117, time: new Date(Date.now())},
-  { price: 21811.66, type: TileType.Short, volume: 0.30117, time: new Date(Date.now())},
-  { price: 21814.81, type: TileType.Long, volume: 0.00072, time: new Date(Date.now())},
-  { price: 21814.77, type: TileType.Long, volume: 0.03, time: new Date(Date.now())},
-  { price: 21814.14, type: TileType.Short, volume: 0.00083, time: new Date(Date.now())},
-  { price: 21813.98, type: TileType.Long, volume: 0.45879, time: new Date(Date.now())},
-  { price: 21813.85, type: TileType.Long, volume: 0.22, time: new Date(Date.now())},
-  { price: 21813.63, type: TileType.Short, volume: 0.00069, time: new Date(Date.now())},
-  { price: 21813.62, type: TileType.Long, volume: 0.01168, time: new Date(Date.now())},
-  { price: 21812.97, type: TileType.Long, volume: 0.00765, time: new Date(Date.now())},
-  { price: 21812.75, type: TileType.Long, volume: 0.00061, time: new Date(Date.now())},
-  { price: 21812.43, type: TileType.Long, volume: 0.55, time: new Date(Date.now())},
-  { price: 21812.32, type: TileType.Short, volume: 0.04473, time: new Date(Date.now())},
-  { price: 21811.66, type: TileType.Short, volume: 0.00117, time: new Date(Date.now())},
-  { price: 21811.66, type: TileType.Long, volume: 0.00117, time: new Date(Date.now())},
-  { price: 21811.66, type: TileType.Long, volume: 0.00117, time: new Date(Date.now())},
-  { price: 21811.66, type: TileType.Long, volume: 0.00817, time: new Date(Date.now())},
-  { price: 21811.66, type: TileType.Short, volume: 0.10117, time: new Date(Date.now())},
-  { price: 21811.66, type: TileType.Short, volume: 0.20117, time: new Date(Date.now())},
-  { price: 21811.66, type: TileType.Short, volume: 0.30117, time: new Date(Date.now())},
-  { price: 21811.66, type: TileType.Long, volume: 0.00117, time: new Date(Date.now())},
-  { price: 21811.66, type: TileType.Long, volume: 0.00817, time: new Date(Date.now())},
-  { price: 21811.66, type: TileType.Short, volume: 0.10117, time: new Date(Date.now())},
-  { price: 21811.66, type: TileType.Short, volume: 0.20117, time: new Date(Date.now())},
-  { price: 21811.66, type: TileType.Short, volume: 0.30117, time: new Date(Date.now())},
+  { price: 21814.81, type: TileType.Long, volume: 0.00072, time: new Date(Date.now()) },
+  { price: 21814.77, type: TileType.Long, volume: 0.03, time: new Date(Date.now()) },
+  { price: 21814.14, type: TileType.Short, volume: 0.00083, time: new Date(Date.now()) },
+  { price: 21813.98, type: TileType.Long, volume: 0.45879, time: new Date(Date.now()) },
+  { price: 21813.85, type: TileType.Long, volume: 0.22, time: new Date(Date.now()) },
+  { price: 21813.63, type: TileType.Short, volume: 0.00069, time: new Date(Date.now()) },
+  { price: 21813.62, type: TileType.Long, volume: 0.01168, time: new Date(Date.now()) },
+  { price: 21812.97, type: TileType.Long, volume: 0.00765, time: new Date(Date.now()) },
+  { price: 21812.75, type: TileType.Long, volume: 0.00061, time: new Date(Date.now()) },
+  { price: 21812.43, type: TileType.Long, volume: 0.55, time: new Date(Date.now()) },
+  { price: 21812.32, type: TileType.Short, volume: 0.04473, time: new Date(Date.now()) },
+  { price: 21811.66, type: TileType.Short, volume: 0.00117, time: new Date(Date.now()) },
+  { price: 21811.66, type: TileType.Long, volume: 0.00117, time: new Date(Date.now()) },
+  { price: 21811.66, type: TileType.Long, volume: 0.00117, time: new Date(Date.now()) },
+  { price: 21811.66, type: TileType.Long, volume: 0.00817, time: new Date(Date.now()) },
+  { price: 21811.66, type: TileType.Short, volume: 0.10117, time: new Date(Date.now()) },
+  { price: 21811.66, type: TileType.Short, volume: 0.20117, time: new Date(Date.now()) },
+  { price: 21811.66, type: TileType.Short, volume: 0.30117, time: new Date(Date.now()) },
+  { price: 21814.81, type: TileType.Long, volume: 0.00072, time: new Date(Date.now()) },
+  { price: 21814.77, type: TileType.Long, volume: 0.03, time: new Date(Date.now()) },
+  { price: 21814.14, type: TileType.Short, volume: 0.00083, time: new Date(Date.now()) },
+  { price: 21813.98, type: TileType.Long, volume: 0.45879, time: new Date(Date.now()) },
+  { price: 21813.85, type: TileType.Long, volume: 0.22, time: new Date(Date.now()) },
+  { price: 21813.63, type: TileType.Short, volume: 0.00069, time: new Date(Date.now()) },
+  { price: 21813.62, type: TileType.Long, volume: 0.01168, time: new Date(Date.now()) },
+  { price: 21812.97, type: TileType.Long, volume: 0.00765, time: new Date(Date.now()) },
+  { price: 21812.75, type: TileType.Long, volume: 0.00061, time: new Date(Date.now()) },
+  { price: 21812.43, type: TileType.Long, volume: 0.55, time: new Date(Date.now()) },
+  { price: 21812.32, type: TileType.Short, volume: 0.04473, time: new Date(Date.now()) },
+  { price: 21811.66, type: TileType.Short, volume: 0.00117, time: new Date(Date.now()) },
+  { price: 21811.66, type: TileType.Long, volume: 0.00117, time: new Date(Date.now()) },
+  { price: 21811.66, type: TileType.Long, volume: 0.00117, time: new Date(Date.now()) },
+  { price: 21811.66, type: TileType.Long, volume: 0.00817, time: new Date(Date.now()) },
+  { price: 21811.66, type: TileType.Short, volume: 0.10117, time: new Date(Date.now()) },
+  { price: 21811.66, type: TileType.Short, volume: 0.20117, time: new Date(Date.now()) },
+  { price: 21811.66, type: TileType.Short, volume: 0.30117, time: new Date(Date.now()) },
+  { price: 21811.66, type: TileType.Long, volume: 0.00117, time: new Date(Date.now()) },
+  { price: 21811.66, type: TileType.Long, volume: 0.00817, time: new Date(Date.now()) },
+  { price: 21811.66, type: TileType.Short, volume: 0.10117, time: new Date(Date.now()) },
+  { price: 21811.66, type: TileType.Short, volume: 0.20117, time: new Date(Date.now()) },
+  { price: 21811.66, type: TileType.Short, volume: 0.30117, time: new Date(Date.now()) },
 ]);
-

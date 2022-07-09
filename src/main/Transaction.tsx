@@ -1,6 +1,6 @@
-import type { Component, JSXElement } from "solid-js";
-import { onMount, createSignal, createMemo } from "solid-js";
-import { theme, DefaultProps, TileType, Accuracy, base, asset, transactions, TransactionData } from "../config";
+import { Component, JSXElement, onMount, createSignal, createMemo } from "solid-js";
+
+import { DefaultProps, Accuracy, asset, transactions, TransactionData } from "../config";
 
 import TransactionTile from "./TransactionTile";
 

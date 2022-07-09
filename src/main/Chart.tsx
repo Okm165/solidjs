@@ -1,8 +1,8 @@
-import type { Component } from "solid-js";
-import { onMount } from "solid-js";
+import { Component, onMount } from "solid-js";
+
+import { chartOptions, DefaultProps } from "../config";
 
 import { createChart } from "lightweight-charts";
-import { theme, chartOptions, DefaultProps } from "../config";
 
 const Chart: Component<{} & DefaultProps> = (props) => {
   let chartDOM: HTMLDivElement | undefined = undefined;

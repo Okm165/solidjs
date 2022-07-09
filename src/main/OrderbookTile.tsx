@@ -1,8 +1,8 @@
-import { Component, createSignal } from "solid-js";
-import { onMount } from "solid-js";
+import { Component } from "solid-js";
+
+import { theme, DefaultProps, TileType, Accuracy } from "../config";
 
 import Button from "@suid/material/Button";
-import { theme, DefaultProps, TileType, Accuracy, base, asset } from "../config";
 
 const OrderbookTile: Component<{ price: number; volume: number; type: TileType; accuracy: Accuracy; fill: number } & DefaultProps> = (props) => {
   return (
