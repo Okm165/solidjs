@@ -1,11 +1,20 @@
-import { Component, onMount } from "solid-js";
+import { Component, onMount, createSignal } from "solid-js";
 
-import { chartOptions, DefaultProps } from "../config";
+import { theme, chartOptions, DefaultProps } from "../config";
 
 import { createChart } from "lightweight-charts";
 
+import ToggleButtonGroup from "@suid/material/ToggleButtonGroup";
+import ToggleButton from "@suid/material/ToggleButton";
+
+enum Type {
+  Standard,
+  Tick,
+}
+
 const Chart: Component<{} & DefaultProps> = (props) => {
   let chartDOM: HTMLDivElement | undefined = undefined;
+  const [type, setType] = createSignal<Type>(Type.Standard);
 
   onMount(() => {
     const chart = createChart(chartDOM as HTMLElement, chartOptions);
@@ -52,8 +61,46 @@ const Chart: Component<{} & DefaultProps> = (props) => {
   });
 
   return (
-    <div id={props.id} style={props.style} class={`${props.class} truncate relative`}>
-      <div class="absolute top-0 bottom-0 left-0 right-0" ref={chartDOM}></div>
+    <div id={props.id} style={props.style} class={`${props.class} flex flex-col`}>
+      <div class="flex flex-row-reverse pr-12">
+        <div class="p-1">
+          <ToggleButtonGroup
+            color="primary"
+            value={type()}
+            exclusive
+            onChange={(event, newAlignment) => {
+              setType(newAlignment);
+            }}
+            sx={{ height: "20px"}}
+          >
+            <ToggleButton
+              size="small"
+              color="primary"
+              sx={{
+                px: 3,
+                fontSize: 9,
+              }}
+              value={Type.Standard}
+            >
+              Standard
+            </ToggleButton>
+            <ToggleButton
+              size="small"
+              color="primary"
+              sx={{
+                px: 3,
+                fontSize: 9,
+              }}
+              value={Type.Tick}
+            >
+              Tick
+            </ToggleButton>
+          </ToggleButtonGroup>
+        </div>
+      </div>
+      <div class="flex-1 truncate relative">
+        <div class="absolute top-0 bottom-0 left-0 right-0" ref={chartDOM}></div>
+      </div>
     </div>
   );
 };

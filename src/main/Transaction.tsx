@@ -4,7 +4,7 @@ import { DefaultProps, Accuracy, asset, transactions, TransactionData } from "..
 
 import TransactionTile from "./TransactionTile";
 
-const height = 16;
+import { height } from "./TransactionTile";
 
 const Transactions: Component<{ accuracy: Accuracy } & DefaultProps> = (props) => {
   const date = new Date(Date.now());
@@ -32,11 +32,11 @@ const Transactions: Component<{ accuracy: Accuracy } & DefaultProps> = (props) =
   });
 
   return (
-    <div id={props.id} style={props.style} class={`${props.class} flex-col p-1`}>
-      <div class="grid grid-cols-2 2xl:grid-cols-3 gap-1 text-xs font-light px-5">
-        <div class="truncate text-left">price</div>
-        <div class="truncate text-right">{asset}</div>
-        <div class="truncate text-right hidden 2xl:block">time</div>
+    <div id={props.id} style={props.style} class={`${props.class} flex flex-col p-1`}>
+      <div class="grid grid-cols-2 xl:grid-cols-3 gap-1 text-xs font-light px-5 p-1">
+        <div class="truncate mx-2 xl:mx-4 text-left">price</div>
+        <div class="truncate mx-2 xl:mx-4 text-right">{asset}</div>
+        <div class="truncate mx-2 xl:mx-4 text-right hidden xl:block">time</div>
       </div>
       <div class="flex-1 relative">
         <div class="absolute top-0 bottom-0 left-0 right-0 flex flex-col overflow-hidden" ref={transactionDOM}>

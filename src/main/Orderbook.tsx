@@ -3,8 +3,7 @@ import { Component, createMemo, createSignal, JSXElement, onMount } from "solid-
 import { theme, DefaultProps, base, asset, short, long, OrderBookData, TileType, Accuracy } from "../config";
 
 import OrderbookTile from "./OrderbookTile";
-
-const height = 16;
+import { height } from "./OrderbookTile";
 
 interface OrderBookDataFill extends OrderBookData {
   fill?: number;
@@ -80,22 +79,22 @@ const Orderbook: Component<{ accuracy: Accuracy } & DefaultProps> = (props) => {
 
   return (
     <div id={props.id} style={props.style} class={`${props.class} flex flex-col p-1`}>
-      <div class="grid grid-cols-2 sm:grid-cols-3 gap-1 text-xs font-light px-5">
-        <div class="truncate text-left">price</div>
-        <div class="truncate text-right">{asset}</div>
-        <div class="truncate text-right hidden sm:block">{base}</div>
+      <div class="grid grid-cols-2 xl:grid-cols-3 gap-1 text-xs font-light px-5 p-1">
+        <div class="truncate mx-2 xl:mx-4 text-left">price</div>
+        <div class="truncate mx-2 xl:mx-4 text-right">{asset}</div>
+        <div class="truncate mx-2 xl:mx-4 text-right hidden xl:block">{base}</div>
       </div>
       <div class="flex-1 relative">
         <div class="absolute top-0 bottom-0 left-0 right-0 flex flex-col-reverse overflow-hidden" ref={orderbookDOM}>
           {orderbook_short()}
         </div>
       </div>
-      <div class="flex-[0.15] flex flex-row text-xs font-thin px-2">
-        <div class="self-center md:block hidden">1 {asset} = </div>
+      <div class="flex flex-row text-xs font-thin px-2">
+        <div class="self-center xl:block hidden">1 {asset} = </div>
         <div style={{ color: theme.bars.rising }} class="self-center p-2 font-bold text-lg select-none">
           21,958.37
         </div>
-        <div class="self-center">{base}</div>
+        <div class="self-center xl:block hidden">{base}</div>
       </div>
       <div class="flex-1 relative">
         <div class="absolute top-0 bottom-0 left-0 right-0 flex flex-col overflow-hidden">{orderbook_long()}</div>
