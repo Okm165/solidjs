@@ -1,9 +1,10 @@
 import { Component, createSignal } from "solid-js";
 
-import { DefaultProps, theme } from "../config";
+import { DefaultProps, theme, asset, base } from "../config";
 
-import ToggleButtonGroup from "@suid/material/ToggleButtonGroup";
-import ToggleButton from "@suid/material/ToggleButton";
+import Button from "@suid/material/Button";
+import Input from "./Input";
+import Slider from "./Slider";
 
 enum Action {
   Buy,
@@ -21,68 +22,52 @@ const Spot: Component<{} & DefaultProps> = (props) => {
   const [type, setType] = createSignal<Type>(Type.Limit);
 
   return (
-    <div id={props.id} style={props.style} class={`${props.class} flex flex-col p-1`}>
-      <div class="p-1 text-center">
-        <ToggleButtonGroup
-          color="primary"
-          value={action()}
-          exclusive
-          onChange={(event, newAlignment) => {
-            setAction(newAlignment);
-          }}
-          sx={{ height: "35px", mx: 2, my: 1 }}
-        >
-          <ToggleButton
+    <div id={props.id} style={props.style} class={`${props.class} justify-around p-1`}>
+      <div class="flex flex-col p-1 m-1">
+        <div class="p-1">
+          <Input left={<span>Price</span>} right={<span>{base}</span>}></Input>
+          <Input left={<span>Amount</span>} right={<span>{base}</span>}></Input>
+          <Input left={<span>Amount</span>} right={<span>{asset}</span>}></Input>
+        </div>
+        <Slider></Slider>
+        <div class="p-2 text-center">
+          <Button
             size="small"
-            color="primary"
+            variant="contained"
             sx={{
               px: 4,
-              fontSize: 15,
-              transition: "all 100ms ease-in-out",
-              "&.Mui-selected": { color: theme.bars.rising },
+              fontSize: 12,
+              "&.MuiButton-root": { bgcolor: theme.bars.rising, color: theme.palette.text.disabled },
+              "&:hover": { bgcolor: theme.bars.rising, color: theme.palette.text.disabled, filter: "brightness(0.8)" },
+              width: "90%",
             }}
-            value={Action.Buy}
           >
             Buy
-          </ToggleButton>
-          <ToggleButton
+          </Button>
+        </div>
+      </div>
+      <div class="flex flex-col p-1 m-1">
+        <div class="p-1 text">
+          <Input left={<span>Price</span>} right={<span>{base}</span>}></Input>
+          <Input left={<span>Amount</span>} right={<span>{base}</span>}></Input>
+          <Input left={<span>Amount</span>} right={<span>{asset}</span>}></Input>
+        </div>
+        <Slider></Slider>
+        <div class="p-2 text-center">
+          <Button
             size="small"
-            color="primary"
+            variant="contained"
             sx={{
               px: 4,
-              fontSize: 15,
-              transition: "all 100ms ease-in-out",
-              "&.Mui-selected": { color: theme.bars.falling },
+              fontSize: 12,
+              "&.MuiButton-root": { bgcolor: theme.bars.falling, color: theme.palette.text.disabled, filter: "brightness(0.9)" },
+              "&:hover": { bgcolor: theme.bars.falling, color: theme.palette.text.disabled, filter: "brightness(0.7)" },
+              width: "90%",
             }}
-            value={Action.Sell}
           >
             Sell
-          </ToggleButton>
-        </ToggleButtonGroup>
-      </div>
-      <div class="p-1 text-center">
-        <ToggleButtonGroup
-          color="primary"
-          value={type()}
-          exclusive
-          onChange={(event, newAlignment) => {
-            setType(newAlignment);
-          }}
-          sx={{ height: "25px" }}
-        >
-          <ToggleButton size="small" color="primary" sx={{ px: 2, fontSize: 10 }} value={Type.Limit}>
-            Limit
-          </ToggleButton>
-          <ToggleButton size="small" color="primary" sx={{ px: 2, fontSize: 10 }} value={Type.Market}>
-            Market
-          </ToggleButton>
-          <ToggleButton size="small" color="primary" sx={{ px: 2, fontSize: 10 }} value={Type.Conditional}>
-            Conditional
-          </ToggleButton>
-        </ToggleButtonGroup>
-      </div>
-      <div class="">
-        
+          </Button>
+        </div>
       </div>
     </div>
   );

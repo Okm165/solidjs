@@ -1,3 +1,38 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+::-webkit-scrollbar {
+    @apply w-1
+}
+
+/* Track */
+::-webkit-scrollbar-track {}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    @apply bg-slate-600 shadow-sm rounded-sm;
+}
+
+.slider {
+    @apply bg-slate-600;
+    overflow: hidden;
+    height: 10px;
+    -webkit-appearance: none;
+    border-radius: 10px;
+}
+
+.slider::-webkit-slider-runnable-track {
+    height: 10px;
+}
+
+.slider::-webkit-slider-thumb {
+    width: 10px;
+    -webkit-appearance: none;
+    height: 10px;
+    cursor: ew-resize;
+    background: #eee;
+    border-radius: 50%;
+    transition: box-shadow 0.2s ease-in-out;
+    position: relative;
+}
