@@ -1,5 +1,5 @@
 import type { Component } from "solid-js";
-import { DefaultProps, theme } from "../config";
+import { DefaultProps } from "../config";
 
 const Footer: Component<{} & DefaultProps> = (props) => {
   return (

@@ -1,5 +1,5 @@
 import { Component } from "solid-js";
-import { DefaultProps } from "../config";
+import { DefaultProps, accuracy } from "../config";
 
 import Chart from "./Chart";
 import Orders from "./Orders";
@@ -18,8 +18,8 @@ const Main: Component<{} & DefaultProps> = (props) => {
       </div>
       <div class="flex flex-col">
         <div class="flex-1 flex-row hidden md:flex">
-          <Orderbook id="orderbook" accuracy={{ price: 2, volume_asset: 6, volume_base: 3 }} class="flex-1"></Orderbook>
-          <Trades id="transaction" accuracy={{ price: 2, volume_asset: 6 }} class=""></Trades>
+          <Orderbook id="orderbook" class="flex-1"></Orderbook>
+          <Trades id="transaction" class="flex-[0.8]"></Trades>
         </div>
         <Spot id="spot" class="flex flex-col md:flex-row"></Spot>
       </div>

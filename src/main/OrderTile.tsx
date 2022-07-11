@@ -1,6 +1,6 @@
 import { Component } from "solid-js";
 
-import { DefaultProps, theme, OrderType } from "../config";
+import { DefaultProps, theme } from "../config";
 
 import ClearIcon from "@suid/icons-material/Clear";
 import EditIcon from "@suid/icons-material/Edit";
@@ -8,11 +8,7 @@ import IconButton from "@suid/material/IconButton";
 
 const OrderTile: Component<{} & DefaultProps> = (props) => {
   return (
-    <div
-      id={props.id}
-      style={props.style}
-      class={`${props.class} grid grid-cols-11 gap-1 py-2 my-1 items-center justify-center bg-slate-900`}
-    >
+    <div id={props.id} style={props.style} class={`${props.class} grid grid-cols-11 gap-1 py-2 my-1 items-center justify-center bg-slate-900`}>
       <div class="truncate">Spot Pairs</div>
       <div class="truncate">Order Type</div>
       <div class="truncate">Direction</div>

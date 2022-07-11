@@ -71,7 +71,7 @@ const Chart: Component<{} & DefaultProps> = (props) => {
             onChange={(event, newAlignment) => {
               setType(newAlignment);
             }}
-            sx={{ height: "20px"}}
+            sx={{ height: "20px" }}
           >
             <ToggleButton
               size="small"

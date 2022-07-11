@@ -6,16 +6,20 @@ import ToggleButton from "@suid/material/ToggleButton";
 import ToggleButtonGroup from "@suid/material/ToggleButtonGroup";
 import OrderTile from "./OrderTile";
 
-enum Menu {
+export enum Menu {
   OpenOrders,
   OrderHistory,
   TradeHistory,
-  Funds,
 }
 
-const Positions: Component<{} & DefaultProps> = (props) => {
-  const [menu, setMenu] = createSignal<Menu>(Menu.OpenOrders);
+export enum OrderType {
+  Limit,
+  Conditional,
+}
 
+export const [menu, setMenu] = createSignal<Menu>(Menu.OpenOrders);
+
+const Positions: Component<{} & DefaultProps> = (props) => {
   return (
     <div id={props.id} style={props.style} class={`${props.class} flex flex-col truncate ml-1`}>
       <div>

@@ -7,9 +7,6 @@ import Input from "./Input";
 import Slider from "./Slider";
 
 const Spot: Component<{} & DefaultProps> = (props) => {
-  // const [action, setAction] = createSignal<Action>(Action.Buy);
-  // const [type, setType] = createSignal<OrderType>(OrderType.Limit);
-
   return (
     <div id={props.id} style={props.style} class={`${props.class} justify-around p-1`}>
       <div class="flex flex-col p-1 m-1">
