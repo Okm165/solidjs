@@ -6,7 +6,7 @@ import Button from "@suid/material/Button";
 
 export const height = 18;
 
-const TransactionTile: Component<{ price: number; volume: number; type: TileType; accuracy: Accuracy; time: Date } & DefaultProps> = (props) => {
+const TradeTile: Component<{ price: number; volume: number; type: TileType; accuracy: Accuracy; time: Date } & DefaultProps> = (props) => {
   return (
     <Button
       sx={{
@@ -26,4 +26,4 @@ const TransactionTile: Component<{ price: number; volume: number; type: TileType
     </Button>
   );
 };
-export default TransactionTile;
+export default TradeTile;

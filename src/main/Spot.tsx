@@ -1,33 +1,22 @@
 import { Component, createSignal } from "solid-js";
 
-import { DefaultProps, theme, asset, base } from "../config";
+import { DefaultProps, theme, base_asset, quote_asset } from "../config";
 
 import Button from "@suid/material/Button";
 import Input from "./Input";
 import Slider from "./Slider";
 
-enum Action {
-  Buy,
-  Sell,
-}
-
-enum Type {
-  Limit,
-  Market,
-  Conditional,
-}
-
 const Spot: Component<{} & DefaultProps> = (props) => {
-  const [action, setAction] = createSignal<Action>(Action.Buy);
-  const [type, setType] = createSignal<Type>(Type.Limit);
+  // const [action, setAction] = createSignal<Action>(Action.Buy);
+  // const [type, setType] = createSignal<OrderType>(OrderType.Limit);
 
   return (
     <div id={props.id} style={props.style} class={`${props.class} justify-around p-1`}>
       <div class="flex flex-col p-1 m-1">
         <div class="p-1">
-          <Input left={<span>Price</span>} right={<span>{base}</span>}></Input>
-          <Input left={<span>Amount</span>} right={<span>{base}</span>}></Input>
-          <Input left={<span>Amount</span>} right={<span>{asset}</span>}></Input>
+          <Input left={<span>Price</span>} right={<span>{base_asset}</span>}></Input>
+          <Input left={<span>Amount</span>} right={<span>{base_asset}</span>}></Input>
+          <Input left={<span>Amount</span>} right={<span>{quote_asset}</span>}></Input>
         </div>
         <Slider></Slider>
         <div class="p-2 text-center">
@@ -48,9 +37,9 @@ const Spot: Component<{} & DefaultProps> = (props) => {
       </div>
       <div class="flex flex-col p-1 m-1">
         <div class="p-1 text">
-          <Input left={<span>Price</span>} right={<span>{base}</span>}></Input>
-          <Input left={<span>Amount</span>} right={<span>{base}</span>}></Input>
-          <Input left={<span>Amount</span>} right={<span>{asset}</span>}></Input>
+          <Input left={<span>Price</span>} right={<span>{base_asset}</span>}></Input>
+          <Input left={<span>Amount</span>} right={<span>{base_asset}</span>}></Input>
+          <Input left={<span>Amount</span>} right={<span>{quote_asset}</span>}></Input>
         </div>
         <Slider></Slider>
         <div class="p-2 text-center">

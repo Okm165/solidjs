@@ -1,4 +1,4 @@
-import { Component, createSignal, JSXElement, onMount } from "solid-js";
+import { Component, JSXElement } from "solid-js";
 
 import { theme, DefaultProps } from "../config";
 
@@ -6,10 +6,10 @@ const Slider: Component<{ left?: JSXElement; right?: JSXElement } & DefaultProps
   let sliderDOM: HTMLInputElement | undefined = undefined;
   let popupDOM: HTMLInputElement | undefined = undefined;
 
-  function handler(this:HTMLInputElement, e: Event) {
+  function handler(this: HTMLInputElement, e: Event) {
     const sliderRect = this.getBoundingClientRect();
     const popupRect = popupDOM.getBoundingClientRect();
-    const left = sliderRect.left + sliderRect.width * parseInt(this.value) / 100 - popupRect.width/2;
+    const left = sliderRect.left + (sliderRect.width * parseInt(this.value)) / 100 - popupRect.width / 2;
     popupDOM.style.left = left + "px";
     popupDOM.innerHTML = this.value + "%";
   }
@@ -19,8 +19,9 @@ const Slider: Component<{ left?: JSXElement; right?: JSXElement } & DefaultProps
     popupDOM.style.display = "block";
     const sliderRect = sliderDOM.getBoundingClientRect();
     const popupRect = popupDOM.getBoundingClientRect();
+    const left = sliderRect.left + (sliderRect.width * parseInt(sliderDOM.value)) / 100 - popupRect.width / 2;
     popupDOM.style.top = sliderRect.top - popupRect.height - 5 + "px";
-    const left = sliderRect.left + sliderRect.width * parseInt(sliderDOM.value) / 100 - popupRect.width/2;
+    popupDOM.style.left = left + "px";
     sliderDOM.addEventListener("input", handler);
   };
   const mouseup = (e: MouseEvent) => {
@@ -51,10 +52,6 @@ const Slider: Component<{ left?: JSXElement; right?: JSXElement } & DefaultProps
           onmousedown={(e) => {
             mousedown(e);
           }}
-        //   onInput={(e) => {
-        //     console.log(e);
-        //     popupDOM.innerText = sliderDOM.value + "%";
-        //   }}
           onmouseup={(e) => {
             mouseup(e);
           }}

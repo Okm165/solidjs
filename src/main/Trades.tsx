@@ -1,10 +1,10 @@
 import { Component, JSXElement, onMount, createSignal, createMemo } from "solid-js";
 
-import { DefaultProps, Accuracy, asset, transactions, TransactionData } from "../config";
+import { DefaultProps, Accuracy, quote_asset, transactions, TransactionData } from "../config";
 
-import TransactionTile from "./TransactionTile";
+import TransactionTile from "./TradeTile";
 
-import { height } from "./TransactionTile";
+import { height } from "./TradeTile";
 
 const Transactions: Component<{ accuracy: Accuracy } & DefaultProps> = (props) => {
   const date = new Date(Date.now());
@@ -16,7 +16,13 @@ const Transactions: Component<{ accuracy: Accuracy } & DefaultProps> = (props) =
 
     return transactionset.map<JSXElement>((element) => {
       return (
-        <TransactionTile type={element.type} accuracy={props.accuracy} price={element.price} volume={element.volume} time={element.time}></TransactionTile>
+        <TransactionTile
+          type={element.type}
+          accuracy={props.accuracy}
+          price={element.price}
+          volume={element.volume}
+          time={element.time}
+        ></TransactionTile>
       );
     });
   });
@@ -35,7 +41,7 @@ const Transactions: Component<{ accuracy: Accuracy } & DefaultProps> = (props) =
     <div id={props.id} style={props.style} class={`${props.class} flex flex-col px-2`}>
       <div class="grid grid-cols-3 gap-1 text-xs font-light px-5 p-1">
         <div class="truncate mx-4 text-left">price</div>
-        <div class="truncate mx-4 text-right">{asset}</div>
+        <div class="truncate mx-4 text-right">{quote_asset}</div>
         <div class="truncate mx-4 text-right">time</div>
       </div>
       <div class="flex-1 relative">

@@ -15,10 +15,9 @@ const Input: Component<{ left?: JSXElement; right?: JSXElement } & DefaultProps>
         color: theme.palette.text.primary,
         "border-color": `${focused() ? theme.palette.primary.dark : "#00000000"}`,
       }}
-      class={`${props.class} flex flex-row m-1 my-2 p-1 text-sm items-center cursor-text border rounded-sm bg-slate-800`}
+      class={`${props.class} flex flex-row m-1 my-2 p-1 text-sm items-center cursor-text border rounded-sm bg-slate-900`}
       onclick={(e) => {
         inputDOM.focus();
-        setFocused(true);
       }}
     >
       <div class="text-center text-xs min-w-[50px]">{props.left}</div>
@@ -30,6 +29,9 @@ const Input: Component<{ left?: JSXElement; right?: JSXElement } & DefaultProps>
           ref={inputDOM}
           onBlur={(e) => {
             setFocused(false);
+          }}
+          onFocus={(e) => {
+            setFocused(true);
           }}
         ></input>
       </div>

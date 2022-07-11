@@ -118,8 +118,19 @@ export interface TransactionData {
   time: Date;
 }
 
-export const asset = "BTC";
-export const base = "USDT";
+export enum Action {
+  Buy,
+  Sell,
+}
+
+export enum OrderType {
+  Limit,
+  Market,
+  Conditional,
+}
+
+export const base_asset = "BTC";
+export const quote_asset = "USDT";
 
 export const [short, setShort] = createSignal<OrderBookData[]>([
   { price: 21792.13, volume: 0.00223 },
