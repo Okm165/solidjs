@@ -1,8 +1,8 @@
-import { Component, createSignal, JSXElement } from "solid-js";
+import { Accessor, Component, createSignal, JSX, JSXElement } from "solid-js";
 
 import { theme, DefaultProps } from "../config";
 
-const Input: Component<{ left?: JSXElement; right?: JSXElement } & DefaultProps> = (props) => {
+const Input: Component<{ left?: JSXElement; right?: JSXElement, onkeyup?: (e: KeyboardEvent) => void, value?: Accessor<string>} & DefaultProps> = (props) => {
   let inputDOM: HTMLInputElement | undefined = undefined;
 
   const [focused, setFocused] = createSignal<boolean>(false);
@@ -27,9 +27,11 @@ const Input: Component<{ left?: JSXElement; right?: JSXElement } & DefaultProps>
           type="text"
           spellcheck={false}
           ref={inputDOM}
+          value={props.value ? props.value() : null}
           onBlur={(e) => {
             setFocused(false);
           }}
+          onkeyup={props.onkeyup}
           onFocus={(e) => {
             setFocused(true);
           }}
