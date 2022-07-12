@@ -1,4 +1,4 @@
-import { createSignal, JSX, JSXElement } from "solid-js";
+import { JSX, JSXElement } from "solid-js";
 
 import { createTheme } from "@suid/material/styles";
 import { PaletteColor } from "@suid/material/styles/createPalette";

@@ -1,7 +1,6 @@
-import { Component, createEffect, createMemo, createSignal, JSXElement, onMount } from "solid-js";
-
+import { Component, createEffect, createMemo, createSignal, For, onMount } from "solid-js";
+import { createStore } from "solid-js/store";
 import { theme, DefaultProps, base_asset, quote_asset, TileType } from "../config";
-
 import OrderbookTile, { height } from "./OrderbookTile";
 
 export interface OrderBookData {
@@ -13,59 +12,65 @@ export interface OrderBookDataFill extends OrderBookData {
   fill?: number;
 }
 
-export const [capacity, setCapacity] = createSignal<number>(0);
-export const [orderbookShortList, setOrderBookShortList] = createSignal<OrderBookData[]>([]);
-export const [orderbookLongList, setOrderbookLongList] = createSignal<OrderBookData[]>([]);
-export const [price, setPrice] = createSignal<number>();
-export const [priceTileType, setPriceTileType] = createSignal<TileType>(TileType.Long);
-export const [spread, setSpread] = createSignal<number>();
+export interface orderbookStore {
+  capacity: number;
+  price: number;
+  priceTileType: TileType;
+  spread: number;
+}
+
+export const [store, setStore] = createStore<orderbookStore>({
+  capacity: null,
+  price: null,
+  priceTileType: null,
+  spread: null,
+});
+
+export const [short, setShort] = createSignal<OrderBookData[]>([]);
+export const [long, setLong] = createSignal<OrderBookData[]>([]);
 
 const Orderbook: Component<{} & DefaultProps> = (props) => {
   let orderbookDOM: HTMLDivElement | undefined = undefined;
 
-  const orderbookShortElements = createMemo<JSXElement>(() => {
+  const shortElements = createMemo<OrderBookDataFill[]>(() => {
     let total = 0;
     let tillnow = 0;
-    let orderbook: OrderBookDataFill[] = orderbookShortList().slice(0, capacity());
+    let elements: OrderBookDataFill[] = short().slice(0, store.capacity);
 
-    orderbook.forEach((element) => {
+    elements.forEach((element) => {
       total += element.volume;
     });
 
-    orderbook.forEach((element) => {
+    elements.forEach((element) => {
       element.fill = (tillnow + element.volume) / total;
       tillnow += element.volume;
     });
 
-    return orderbook.map<JSXElement>((element) => {
-      return <OrderbookTile type={TileType.Short} price={element.price} volume={element.volume} fill={element.fill * 100}></OrderbookTile>;
-    });
+    return elements;
   });
 
-  const orderbookLongElements = createMemo<JSXElement>(() => {
+  const longELements = createMemo<OrderBookDataFill[]>(() => {
     let total = 0;
     let tillnow = 0;
-    let orderbook: OrderBookDataFill[] = orderbookLongList().slice(0, capacity());
+    let elements: OrderBookDataFill[] = long().slice(0, store.capacity);
 
-    orderbook.forEach((element) => {
+    elements.forEach((element) => {
       total += element.volume;
     });
 
-    orderbook.forEach((element) => {
+    elements.forEach((element) => {
       element.fill = (tillnow + element.volume) / total;
       tillnow += element.volume;
     });
 
-    return orderbook.map<JSXElement>((element) => {
-      return <OrderbookTile type={TileType.Long} price={element.price} volume={element.volume} fill={element.fill * 100}></OrderbookTile>;
-    });
+    return elements;
   });
 
   createEffect(() => {
-    if (orderbookLongList().length > 0 && orderbookShortList().length > 0) {
-      setSpread(orderbookLongList()[0].price - orderbookShortList()[0].price);
+    if (long().length > 0 && short().length > 0) {
+      setStore("spread", long()[0].price - short()[0].price);
     } else {
-      setSpread(undefined);
+      setStore("spread", null);
     }
   });
 
@@ -73,8 +78,8 @@ const Orderbook: Component<{} & DefaultProps> = (props) => {
     new ResizeObserver((entries) => {
       const newRect = entries[0].contentRect;
       const newCapacity = Math.floor(newRect.height / height);
-      if (newCapacity != capacity()) {
-        setCapacity(newCapacity);
+      if (newCapacity != store.capacity) {
+        setStore("capacity", newCapacity);
       }
     }).observe(orderbookDOM);
   });
@@ -88,24 +93,30 @@ const Orderbook: Component<{} & DefaultProps> = (props) => {
       </div>
       <div class="flex-1 relative">
         <div class="absolute top-0 bottom-0 left-0 right-0 flex flex-col-reverse overflow-hidden" ref={orderbookDOM}>
-          {orderbookShortElements()}
+          <For each={shortElements()}>
+            {(el, i) => <OrderbookTile type={TileType.Short} price={el.price} volume={el.volume} fill={el.fill * 100}></OrderbookTile>}
+          </For>
         </div>
       </div>
       <div class="flex flex-row text-xs items-center justify-start font-thin px-2">
         <div class="flex flex-row items-center px-2">
           <div class="truncate">1 {base_asset} = </div>
-          <div style={{ color: priceTileType() ? theme.bars.falling : theme.bars.rising }} class="p-2 font-bold text-lg">
-            {price() ? price() : "---"}
+          <div style={{ color: store.priceTileType ? theme.bars.falling : theme.bars.rising }} class="p-2 font-bold text-lg">
+            {store.price ? store.price : "---"}
           </div>
           <div>{quote_asset}</div>
         </div>
         <div class="hidden lg:flex flex-row items-center">
           <div>spread:</div>
-          <div class="p-2 font-bold text-md">{spread() ? spread() : "---"}</div>
+          <div class="p-2 font-bold text-md">{store.spread ? store.spread : "---"}</div>
         </div>
       </div>
       <div class="flex-1 relative">
-        <div class="absolute top-0 bottom-0 left-0 right-0 flex flex-col overflow-hidden">{orderbookLongElements()}</div>
+        <div class="absolute top-0 bottom-0 left-0 right-0 flex flex-col overflow-hidden">
+          <For each={longELements()}>
+            {(el, i) => <OrderbookTile type={TileType.Long} price={el.price} volume={el.volume} fill={el.fill * 100}></OrderbookTile>}
+          </For>
+        </div>
       </div>
     </div>
   );

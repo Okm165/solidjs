@@ -1,9 +1,6 @@
 import { Component, onMount, createSignal } from "solid-js";
-
 import { chartOptions, DefaultProps } from "../config";
-
 import { createChart } from "lightweight-charts";
-
 import ToggleButtonGroup from "@suid/material/ToggleButtonGroup";
 import ToggleButton from "@suid/material/ToggleButton";
 

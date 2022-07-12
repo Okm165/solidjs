@@ -1,14 +1,11 @@
 import { Component, createSignal } from "solid-js";
-
 import { DefaultProps, theme } from "../config";
-
 import Drawer from "@suid/material/Drawer";
 import ListItem from "@suid/material/ListItem";
 import ListItemButton from "@suid/material/ListItemButton";
 import ListItemIcon from "@suid/material/ListItemIcon";
 import ListItemText from "@suid/material/ListItemText";
 import Divider from "@suid/material/Divider";
-
 import StorefrontIcon from "@suid/icons-material/Storefront";
 import ShowChartIcon from "@suid/icons-material/ShowChart";
 import SchoolIcon from "@suid/icons-material/School";

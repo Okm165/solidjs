@@ -1,7 +1,5 @@
 import { Component } from "solid-js";
-
 import { theme, DefaultProps, TileType, accuracy } from "../config";
-
 import Button from "@suid/material/Button";
 
 export const height = 18;
@@ -9,12 +7,12 @@ export const height = 18;
 const OrderbookTile: Component<{ price: number; volume: number; type: TileType; fill: number } & DefaultProps> = (props) => {
   return (
     <Button
+      color="primary"
       sx={{
         p: 0,
         m: 0,
         cursor: "default",
       }}
-      color="primary"
     >
       <div id={props.id} style={props.style} class={`${props.class} grid grid-cols-3 gap-1 text-xs font-light w-full relative p-px`}>
         <div style={{ color: props.type ? theme.bars.falling : theme.bars.rising }} class="truncate text-left font-medium">

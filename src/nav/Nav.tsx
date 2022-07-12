@@ -1,14 +1,11 @@
 import { Component } from "solid-js";
-
 import { DefaultProps, theme } from "../config";
-
 import Fab from "@suid/material/Fab";
 import Input from "@suid/material/Input";
 import SearchIcon from "@suid/icons-material/Search";
 import Badge from "@suid/material/Badge";
 import Button from "@suid/material/Button";
 import MenuIcon from "@suid/icons-material/Menu";
-
 import { setState } from "./SideMenu";
 import SideMenu from "./SideMenu";
 import Stats from "./Stats";

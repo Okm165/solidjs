@@ -1,13 +1,10 @@
 import { Component } from "solid-js";
 import { DefaultProps } from "../config";
-
 import Chart from "./Chart";
-import Orders from "./Orders";
+import Orders from "./Order";
 import Orderbook from "./Orderbook";
-import Trades from "./Trades";
+import Trades from "./Trade";
 import Spot from "./Spot";
-
-import "../index.css";
 
 const Main: Component<{} & DefaultProps> = (props) => {
   return (

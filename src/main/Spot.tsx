@@ -1,12 +1,27 @@
-import { Component, createSignal } from "solid-js";
-
+import { Component } from "solid-js";
+import { createStore } from "solid-js/store";
 import { DefaultProps, theme, base_asset, quote_asset } from "../config";
-
 import Button from "@suid/material/Button";
 import Input from "./Input";
 import Slider from "./Slider";
 
-export const [buyPrice, setBuyPrice] = createSignal<string>("");
+export interface SpotStore {
+  buyPrice: string;
+  buyAmountBase: string;
+  buyAmountQuote: string;
+  sellPrice: string;
+  sellAmountBase: string;
+  sellAmountQuote: string;
+}
+
+export const [store, setStore] = createStore<SpotStore>({
+  buyPrice: null,
+  buyAmountBase: null,
+  buyAmountQuote: null,
+  sellPrice: null,
+  sellAmountBase: null,
+  sellAmountQuote: null,
+});
 
 const Spot: Component<{} & DefaultProps> = (props) => {
   return (
@@ -16,25 +31,25 @@ const Spot: Component<{} & DefaultProps> = (props) => {
           <Input
             left={<span>Price</span>}
             right={<span>{base_asset}</span>}
-            value={buyPrice}
+            value={store.buyPrice}
             onkeyup={(e: KeyboardEvent) => {
-              setBuyPrice((e.target as HTMLInputElement).value);
+              setStore("buyPrice", (e.target as HTMLInputElement).value);
             }}
           ></Input>
           <Input
             left={<span>Amount</span>}
             right={<span>{base_asset}</span>}
-            value={buyPrice}
+            value={store.buyAmountBase}
             onkeyup={(e: KeyboardEvent) => {
-              setBuyPrice((e.target as HTMLInputElement).value);
+              setStore("buyAmountBase", (e.target as HTMLInputElement).value);
             }}
           ></Input>
           <Input
             left={<span>Amount</span>}
             right={<span>{quote_asset}</span>}
-            value={buyPrice}
+            value={store.buyAmountQuote}
             onkeyup={(e: KeyboardEvent) => {
-              setBuyPrice((e.target as HTMLInputElement).value);
+              setStore("buyAmountQuote", (e.target as HTMLInputElement).value);
             }}
           ></Input>
         </div>
@@ -60,25 +75,25 @@ const Spot: Component<{} & DefaultProps> = (props) => {
           <Input
             left={<span>Price</span>}
             right={<span>{base_asset}</span>}
-            value={buyPrice}
+            value={store.sellPrice}
             onkeyup={(e: KeyboardEvent) => {
-              setBuyPrice((e.target as HTMLInputElement).value);
+              setStore("sellPrice", (e.target as HTMLInputElement).value);
             }}
           ></Input>
           <Input
             left={<span>Amount</span>}
             right={<span>{base_asset}</span>}
-            value={buyPrice}
+            value={store.sellAmountBase}
             onkeyup={(e: KeyboardEvent) => {
-              setBuyPrice((e.target as HTMLInputElement).value);
+              setStore("sellAmountBase", (e.target as HTMLInputElement).value);
             }}
           ></Input>
           <Input
             left={<span>Amount</span>}
             right={<span>{quote_asset}</span>}
-            value={buyPrice}
+            value={store.sellAmountQuote}
             onkeyup={(e: KeyboardEvent) => {
-              setBuyPrice((e.target as HTMLInputElement).value);
+              setStore("sellAmountQuote", (e.target as HTMLInputElement).value);
             }}
           ></Input>
         </div>

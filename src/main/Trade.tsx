@@ -1,9 +1,7 @@
-import { Component, JSXElement, onMount, createSignal, createMemo } from "solid-js";
-
-import { base_asset, DefaultProps, quote_asset, TileType, tradesCircularBufferSize } from "../config";
-
+import { Component, onMount, For, createSignal } from "solid-js";
+import { createStore } from "solid-js/store";
+import { base_asset, DefaultProps, TileType, tradesCircularBufferSize } from "../config";
 import CircularBuffer from "circular-buffer";
-
 import TradeTile, { height } from "./TradeTile";
 
 export interface TradeData {
@@ -13,38 +11,36 @@ export interface TradeData {
   time: Date;
 }
 
-export const circbuf = new CircularBuffer(tradesCircularBufferSize);
-export const [tradesList, setTradesList] = createSignal<TradeData[]>([]);
-export const [capacity, setCapacity] = createSignal<number>(0);
+export interface TradeStore {
+  capacity: number;
+}
+
+export const [store, setStore] = createStore<TradeStore>({
+  capacity: null,
+});
+
+export const [trades, setTrades] = createSignal<TradeData[]>([]);
+
+const circbuf = new CircularBuffer(tradesCircularBufferSize);
 
 export const push = (trade: TradeData) => {
   circbuf.enq(trade);
-  setTradesList(circbuf.toarray());
+  setTrades(circbuf.toarray());
 };
 
 export const trigger_display = () => {
-  setTradesList(circbuf.toarray());
+  setTrades(circbuf.toarray());
 };
 
 const Trades: Component<{} & DefaultProps> = (props) => {
   let tradesDOM: HTMLDivElement | undefined = undefined;
 
-  const display = () => {
-    return tradesList()
-      .slice(0, capacity())
-      .map<JSXElement>((element) => {
-        return <TradeTile price={element.price} volume={element.volume} type={element.type} time={element.time}></TradeTile>;
-      });
-  };
-
-  const tradesElements = createMemo<JSXElement>(display);
-
   onMount(() => {
     new ResizeObserver((entries) => {
       const newRect = entries[0].contentRect;
       const newCapacity = Math.floor(newRect.height / height);
-      if (newCapacity != capacity()) {
-        setCapacity(newCapacity);
+      if (newCapacity != store.capacity) {
+        setStore("capacity", newCapacity);
       }
     }).observe(tradesDOM);
   });
@@ -58,7 +54,7 @@ const Trades: Component<{} & DefaultProps> = (props) => {
       </div>
       <div class="flex-1 relative">
         <div class="absolute top-0 bottom-0 left-0 right-0 flex flex-col overflow-hidden" ref={tradesDOM}>
-          {tradesElements()}
+          <For each={trades()}>{(el, i) => <TradeTile price={el.price} volume={el.volume} type={el.type} time={el.time}></TradeTile>}</For>
         </div>
       </div>
     </div>

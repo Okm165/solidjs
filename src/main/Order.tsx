@@ -1,7 +1,6 @@
-import { Component, createSignal } from "solid-js";
-
+import { Component, For } from "solid-js";
+import { createStore } from "solid-js/store";
 import { DefaultProps, theme } from "../config";
-
 import ToggleButton from "@suid/material/ToggleButton";
 import ToggleButtonGroup from "@suid/material/ToggleButtonGroup";
 import OrderTile from "./OrderTile";
@@ -17,7 +16,28 @@ export enum OrderType {
   Conditional,
 }
 
-export const [menu, setMenu] = createSignal<Menu>(Menu.OpenOrders);
+export interface Order {
+  spot_pairs: string;
+  order_type: OrderType;
+  direction: string;
+  order_value: number;
+  order_price: number;
+  order_qty: number;
+  filled_qty: number;
+  unfilled_qty: number;
+  order_time: string;
+  order_id: number;
+}
+
+export interface OrdersStore {
+  menu: Menu;
+  orders: Array<Order>;
+}
+
+export const [store, setStore] = createStore<OrdersStore>({
+  menu: Menu.OpenOrders,
+  orders: [],
+});
 
 const Positions: Component<{} & DefaultProps> = (props) => {
   return (
@@ -25,10 +45,10 @@ const Positions: Component<{} & DefaultProps> = (props) => {
       <div>
         <ToggleButtonGroup
           color="primary"
-          value={menu()}
+          value={store.menu}
           exclusive
           onChange={(event, newAlignment) => {
-            setMenu(newAlignment);
+            setStore("menu", newAlignment);
           }}
           sx={{ height: "30px", minWidth: 0 }}
         >
@@ -57,13 +77,22 @@ const Positions: Component<{} & DefaultProps> = (props) => {
         <div class="truncate">Action</div>
       </div>
       <div class="flex-1 flex flex-col p-1 text-center text-xs overflow-y-scroll">
-        <OrderTile></OrderTile>
-        <OrderTile></OrderTile>
-        <OrderTile></OrderTile>
-        <OrderTile></OrderTile>
-        <OrderTile></OrderTile>
-        <OrderTile></OrderTile>
-        <OrderTile></OrderTile>
+        <For each={store.orders}>
+          {(el, i) => (
+            <OrderTile
+              spot_pairs={el.spot_pairs}
+              order_type={el.order_type}
+              direction={el.direction}
+              order_value={el.order_value}
+              order_price={el.order_price}
+              order_qty={el.order_qty}
+              filled_qty={el.filled_qty}
+              unfilled_qty={el.unfilled_qty}
+              order_time={el.order_time}
+              order_id={el.order_id}
+            ></OrderTile>
+          )}
+        </For>
       </div>
     </div>
   );

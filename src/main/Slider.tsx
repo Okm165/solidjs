@@ -1,5 +1,4 @@
 import { Component, JSXElement } from "solid-js";
-
 import { theme, DefaultProps } from "../config";
 
 const Slider: Component<{ left?: JSXElement; right?: JSXElement } & DefaultProps> = (props) => {

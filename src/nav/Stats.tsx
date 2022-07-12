@@ -1,5 +1,4 @@
 import { Component } from "solid-js";
-
 import { DefaultProps, theme, base_asset, quote_asset } from "../config";
 
 const Stats: Component<{} & DefaultProps> = (props) => {

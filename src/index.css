@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 ::-webkit-scrollbar {
-    @apply w-1
+  @apply w-1;
 }
 
 /* Track */
@@ -11,15 +11,15 @@
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    @apply bg-slate-700 shadow-sm rounded-sm;
+  @apply bg-slate-700 shadow-sm rounded-sm;
 }
 
 .slider {
-    @apply bg-slate-800 overflow-hidden h-2 appearance-none rounded-sm;
+  @apply bg-slate-800 overflow-hidden h-2 appearance-none rounded-sm;
 }
 
 /* .slider::-webkit-slider-runnable-track {} */
 
 .slider::-webkit-slider-thumb {
-    @apply appearance-none bg-slate-400 w-3 h-3 cursor-ew-resize rounded-[50%]
+  @apply appearance-none bg-slate-400 w-3 h-3 cursor-ew-resize rounded-[50%];
 }
