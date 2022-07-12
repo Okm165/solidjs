@@ -1,6 +1,6 @@
 import { Component, onMount, createSignal } from "solid-js";
 
-import { theme, chartOptions, DefaultProps } from "../config";
+import { chartOptions, DefaultProps } from "../config";
 
 import { createChart } from "lightweight-charts";
 

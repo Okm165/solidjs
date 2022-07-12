@@ -1,5 +1,5 @@
 import { Component } from "solid-js";
-import { DefaultProps, accuracy } from "../config";
+import { DefaultProps } from "../config";
 
 import Chart from "./Chart";
 import Orders from "./Orders";

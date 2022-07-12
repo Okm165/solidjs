@@ -28,7 +28,7 @@ const App: Component = () => {
     ]);
     push({ price: 12313, volume: 1313, type: TileType.Short, time: new Date(Date.now()) });
   });
-  
+
   return (
     <ThemeProvider theme={theme}>
       <main

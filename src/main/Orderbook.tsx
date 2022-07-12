@@ -64,11 +64,10 @@ const Orderbook: Component<{} & DefaultProps> = (props) => {
   createEffect(() => {
     if (orderbookLongList().length > 0 && orderbookShortList().length > 0) {
       setSpread(orderbookLongList()[0].price - orderbookShortList()[0].price);
-    }
-    else {
+    } else {
       setSpread(undefined);
     }
-  })
+  });
 
   onMount(() => {
     new ResizeObserver((entries) => {
